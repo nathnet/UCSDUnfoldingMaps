@@ -35,6 +35,10 @@ public class HelloWorld extends PApplet
 	/** The map you will use to display your home town */ 
 	UnfoldingMap map2;
 
+	public static void main(String[] args) {
+		PApplet.main(new String(module1.HelloWorld.class.getName()));
+	}
+
 	public void setup() {
 		size(800, 600, P2D);  // Set up the Applet window to be 800x600
 		                      // The OPENGL argument indicates to use the 
@@ -73,17 +77,22 @@ public class HelloWorld extends PApplet
 		
 		// This line makes the map interactive
 		MapUtils.createDefaultEventDispatcher(this, map1);
-		
-		// TODO: Add code here that creates map2 
-		// Then you'll modify draw() below
 
+		// Then you'll modify draw() below
+		map2 = new UnfoldingMap(this, 400, 50, 350, 500, provider);
+
+		// The next line zooms in and centers the map at
+		// 13.5 (latitude) and 100.3 (longitude)
+		map2.zoomAndPanTo(zoomLevel, new Location(13.5f, 100.3f));
+
+		// This line makes the map interactive
+		MapUtils.createDefaultEventDispatcher(this, map2);
 	}
 
 	/** Draw the Applet window.  */
 	public void draw() {
-		// So far we only draw map1...
-		// TODO: Add code so that both maps are displayed
 		map1.draw();
+		map2.draw();
 	}
 
 	
